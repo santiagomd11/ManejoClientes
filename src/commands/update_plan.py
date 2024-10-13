@@ -11,7 +11,7 @@ class UpdateClientPlan(BaseCommand):
         try:
             client = Client.query.filter_by(email=self.client_email).first()
             if not client:
-                raise NotFound(f'Client with email {self.client_email} not found')
+                raise NotFound(f'Client not found')
 
             if not isinstance(self.new_plan, Plan):
                 raise BadRequest('Invalid plan')

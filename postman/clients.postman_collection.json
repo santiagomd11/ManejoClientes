@@ -1,0 +1,70 @@
+{
+    "info": {
+        "name": "ManejoClientes",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "host",
+            "value": "http://localhost:5001"
+        }
+    ],
+    "item": [
+        {
+            "name": "Create Client",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\"\n}"
+                },
+                "url": {
+                    "raw": "{{host}}/create_client",
+                    "host": ["{{host}}"],
+                    "path": ["create_client"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update Client Plan",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"client_id\": 1,\n  \"plan\": \"premium\"\n}"
+                },
+                "url": {
+                    "raw": "{{host}}/update_client_plan",
+                    "host": ["{{host}}"],
+                    "path": ["update_client_plan"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Ping",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{host}}/ping",
+                    "host": ["{{host}}"],
+                    "path": ["ping"]
+                }
+            },
+            "response": []
+        }
+    ]
+}
