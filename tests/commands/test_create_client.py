@@ -30,7 +30,7 @@ class TestCreateClient(unittest.TestCase):
         command = CreateClient(invalid_input)
         with self.assertRaises(BadRequest) as context:
             command.execute()
-        self.assertEqual(str(context.exception), 'Name, password, and email are required')
+        self.assertEqual(str(context.exception), 'Name and email are required')
 
     @patch('src.commands.create_client.validators.email', return_value=False)
     def test_create_client_invalid_email(self, mock_valid_email):

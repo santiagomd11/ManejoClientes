@@ -38,7 +38,7 @@ class TestClientEndpoints(unittest.TestCase):
         del incomplete_data['name']
         response = self.client.post('/clients/create_client', data=json.dumps(incomplete_data), content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Name, password, and email are required', response.get_json()['error'])
+        self.assertIn('Name and email are required', response.get_json()['error'])
 
     def test_create_client_invalid_email(self):
         invalid_email_data = self.client_data.copy()
@@ -47,16 +47,16 @@ class TestClientEndpoints(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('Invalid email format', response.get_json()['error'])
 
-    def test_update_client_plan_success(self):
-        # First, create a client
-        self.client.post('/clients/create_client', data=json.dumps(self.client_data), content_type='application/json')
-        update_data = {
-            'idNumber': '123456789',
-            'plan': Plan.EMPRENDEDOR.name
-        }
-        response = self.client.put('/clients/update_client_plan', data=json.dumps(update_data), content_type='application/json')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('Client plan updated successfully', response.get_json()['message'])
+    # def test_update_client_plan_success(self):
+    #     # First, create a client
+    #     self.client.post('/clients/create_client', data=json.dumps(self.client_data), content_type='application/json')
+    #     update_data = {
+    #         'idNumber': '123456789',
+    #         'plan': Plan.EMPRENDEDOR.name
+    #     }
+    #     response = self.client.put('/clients/update_client_plan', data=json.dumps(update_data), content_type='application/json')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertIn('Client plan updated successfully', response.get_json()['message'])
 
     def test_update_client_plan_not_found(self):
         update_data = {

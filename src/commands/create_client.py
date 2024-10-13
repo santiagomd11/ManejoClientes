@@ -14,12 +14,18 @@ class CreateClient(BaseCommand):
 
     def execute(self):
         try:
-            if not (self.name and self.password and self.email):
-                raise BadRequest('Name, password, and email are required')
+            if not (self.name and self.email):
+                raise BadRequest('Name and email are required')
 
             valid_email = validators.email(self.email)
             if not valid_email:
                 raise BadRequest('Invalid email format')
+
+            if not self.id_number:
+                raise BadRequest('Id is required')
+
+            if not self.phone_number:
+                raise BadRequest('Phone number is required')
 
             client = Client(
                 id=str(uuid.uuid4()),
