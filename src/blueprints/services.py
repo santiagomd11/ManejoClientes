@@ -11,8 +11,8 @@ def create_client():
     try:
         json_input = request.get_json()
         command = CreateClient(json_input)
-        command.execute()
-        return jsonify({'message': 'Client created successfully'}), 201
+        response = command.execute()
+        return jsonify(response), 201
     except BadRequest as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:

@@ -74,11 +74,26 @@ Crea un cliente con los datos brindados, el nombre del cliente debe ser único, 
   "email": "john.doe@example.com",
   "idNumber": "123456789",
   "phoneNumber": "1234567890",
-  "plan": "EMPRESARIO"
+  "plan": "EMPRESARIO",
+  "rol": "CLIENTE",
+  "company": "uniandes"
 }
 ```
 </td>
 </tr>
+</td>
+<td> Retorno </td>
+<td>
+
+```json
+{
+    "email": "john.doe@example.com",
+    "id": "b030dabc-ff9e-4cbb-8d0b-974a68f297da"
+}
+```
+</td>
+<tr>
+
 </table>
 
 ### 2. Actualización de plan de clientes
@@ -108,8 +123,8 @@ Actualiza el plan de un cliente con los datos brindados.
 
 ```json
 {
-  "id": "client-id",
-  "plan": "nuevo-plan"
+  "email": "john.doe@example.com",
+  "plan": "EMPRENDEDOR"
 }
 ```
 </td>

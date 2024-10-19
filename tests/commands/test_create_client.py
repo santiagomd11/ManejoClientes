@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 from src.commands.create_client import CreateClient
 from src.errors.errors import BadRequest
-from src.models.client import Client, db, Plan
+from src.models.client import Client, db, Plan, Rol
 
 class TestCreateClient(unittest.TestCase):
 
@@ -12,7 +12,9 @@ class TestCreateClient(unittest.TestCase):
             'email': 'john.doe@example.com',
             'idNumber': '123456789',
             'phoneNumber': '1234567890',
-            'plan': Plan.EMPRESARIO
+            'plan': Plan.EMPRESARIO,
+            'rol': Rol.CLIENTE.name,
+            'company': 'Test Company'
         }
 
     @patch('src.commands.create_client.db.session.commit')

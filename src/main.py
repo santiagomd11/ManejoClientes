@@ -1,6 +1,7 @@
 import os
 import traceback
 from flask import Flask, jsonify
+from flask_migrate import Migrate, init, upgrade, migrate, stamp
 from src.models.client import db
 from src.blueprints.services import services_bp
 
@@ -30,7 +31,20 @@ def create_app(config_name, local=False):
     app_context = app.app_context()
     app_context.push()
     db.init_app(app)
-    db.create_all()
+
+    # Uncomment the following lines if there are migrations
+    # migrate_manager = Migrate(app, db)
+
+    # with app.app_context():
+    #     if not os.path.exists(os.path.join(os.getcwd(), 'migrations')):
+    #         print("Initializing migration folder...")
+    #         init()
+
+    #     print("Running migrate...")
+    #     migrate()
+
+    #     print("Running upgrade...")
+    #     upgrade()
 
     return app
 

@@ -6,6 +6,10 @@ class UpdateClientPlan(BaseCommand):
     def __init__(self, json_input):
         self.client_email = json_input.get('email')
         self.new_plan = json_input.get('plan')
+        try:
+            self.new_plan = Plan[self.new_plan]
+        except KeyError:
+            raise BadRequest('Invalid plan')
 
     def execute(self):
         try:

@@ -2,7 +2,7 @@ import unittest
 import json
 from flask import Flask
 from src.main import create_app
-from src.models.client import db, Client, Plan
+from src.models.client import db, Client, Plan, Rol
 
 class TestClientEndpoints(unittest.TestCase):
 
@@ -25,7 +25,9 @@ class TestClientEndpoints(unittest.TestCase):
             'email': 'testclient@example.com',
             'idNumber': '123456789',
             'phoneNumber': '1234567890',
-            'plan': Plan.EMPRESARIO.name
+            'plan': Plan.EMPRESARIO.name,
+            'rol': Rol.CLIENTE.name,
+            'company': 'Test Company'
         }
 
     def test_create_client_success(self):
@@ -49,12 +51,12 @@ class TestClientEndpoints(unittest.TestCase):
 
     # def test_update_client_plan_success(self):
     #     # First, create a client
-    #     self.client.post('/clients/create_client', data=json.dumps(self.client_data), content_type='application/json')
+    #     self.client.post('/create_client', data=json.dumps(self.client_data), content_type='application/json')
     #     update_data = {
-    #         'idNumber': '123456789',
+    #         'email': 'testclient@example.com',
     #         'plan': Plan.EMPRENDEDOR.name
     #     }
-    #     response = self.client.put('/clients/update_client_plan', data=json.dumps(update_data), content_type='application/json')
+    #     response = self.client.put('/update_client_plan', data=json.dumps(update_data), content_type='application/json')
     #     self.assertEqual(response.status_code, 200)
     #     self.assertIn('Client plan updated successfully', response.get_json()['message'])
 

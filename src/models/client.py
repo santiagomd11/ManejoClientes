@@ -13,6 +13,10 @@ class Plan(enum.Enum):
     EMPRESARIO = 1
     EMPRENDEDOR = 2
     EMPRENDEDOR_PLUS = 3
+    
+class Rol(enum.Enum):
+    AGENTE = 1,
+    CLIENTE = 2
 
 
 class Client(db.Model):
@@ -23,6 +27,8 @@ class Client(db.Model):
     email = db.Column(db.String, default='')
     phoneNumber = db.Column(db.String, default='')
     plan = db.Column(db.Enum(Plan), default=Plan.EMPRESARIO)
+    rol = db.Column(db.String, default='client')
+    company = db.Column(db.String, default='')
 
 
 class EnumToDictionary(fields.Field):
@@ -34,7 +40,8 @@ class EnumToDictionary(fields.Field):
 
 class ClientSchema(SQLAlchemyAutoSchema):
     plan = EnumToDictionary(attribute=('plan'))
-
+    rol = EnumToDictionary(attribute=('rol'))
+    
     class Meta:
         model = Client
         include_relationships = True
