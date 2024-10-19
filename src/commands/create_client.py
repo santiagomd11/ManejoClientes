@@ -35,8 +35,9 @@ class CreateClient(BaseCommand):
             if not self.company:
                 raise BadRequest('Company is required')
 
+            client_id = str(uuid.uuid4())
             client = Client(
-                id=str(uuid.uuid4()),
+                id=client_id,
                 name=self.name,
                 email=self.email,
                 id_number=self.id_number,
@@ -51,6 +52,8 @@ class CreateClient(BaseCommand):
         except Exception as e:
             db.session.rollback()
             raise e
+        
+        return {"id": client_id, "email": self.email}
 
 def salt_password(password):
     salt = uuid.uuid4().hex
