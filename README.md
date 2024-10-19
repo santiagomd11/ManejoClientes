@@ -71,7 +71,6 @@ Crea un cliente con los datos brindados, el nombre del cliente debe ser único, 
 ```json
 {
   "name": "John Doe",
-  "password": "password123",
   "email": "john.doe@example.com",
   "idNumber": "123456789",
   "phoneNumber": "1234567890",
