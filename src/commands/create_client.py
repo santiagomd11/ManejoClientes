@@ -11,6 +11,8 @@ class CreateClient(BaseCommand):
         self.id_number = json.get('idNumber', '').strip()
         self.phone_number = json.get('phoneNumber', '').strip()
         self.plan = json.get('plan', Plan.EMPRESARIO)
+        self.rol = json.get('rol', 'client')
+        self.company = json.get('company', '')
 
     def execute(self):
         try:
@@ -26,6 +28,12 @@ class CreateClient(BaseCommand):
 
             if not self.phone_number:
                 raise BadRequest('Phone number is required')
+            
+            if not self.rol:
+                raise BadRequest('Rol is required')
+
+            if not self.company:
+                raise BadRequest('Company is required')
 
             client = Client(
                 id=str(uuid.uuid4()),
@@ -33,7 +41,8 @@ class CreateClient(BaseCommand):
                 email=self.email,
                 id_number=self.id_number,
                 phoneNumber=self.phone_number,
-                plan=self.plan
+                plan=self.plan,
+                company=self.company
             )
 
             db.session.add(client)
