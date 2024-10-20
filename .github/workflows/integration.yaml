@@ -1,4 +1,4 @@
-name: Test Workflow
+name: Integration
 on:
   pull_request:
     branches:
@@ -34,10 +34,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Merge develop into main
+      - name: Merge develop into master
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git checkout main
+          git checkout master
           git merge develop
-          git push origin main
+          git push origin master
