@@ -21,7 +21,7 @@ class Rol(enum.Enum):
 
 class Client(db.Model):
     __tablename__ = 'client'
-    id = db.Column(db.String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = db.Column(db.String, primary_key=True, unique=True, nullable=False)
     name = db.Column(db.String, unique=True, nullable=False)
     id_number = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, default='')

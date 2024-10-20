@@ -6,6 +6,7 @@ import uuid
 
 class CreateClient(BaseCommand):
     def __init__(self, json):
+        self.id = json.get('id', '')
         self.name = json.get('name', '').strip()
         self.email = json.get('email', '').strip().lower()
         self.id_number = json.get('idNumber', '').strip()
@@ -16,6 +17,9 @@ class CreateClient(BaseCommand):
 
     def execute(self):
         try:
+            if not self.id:
+                raise BadRequest('Id is required')
+            
             if not (self.name and self.email):
                 raise BadRequest('Name and email are required')
 
@@ -35,9 +39,8 @@ class CreateClient(BaseCommand):
             if not self.company:
                 raise BadRequest('Company is required')
 
-            client_id = str(uuid.uuid4())
             client = Client(
-                id=client_id,
+                id=self.id,
                 name=self.name,
                 email=self.email,
                 id_number=self.id_number,
@@ -53,7 +56,7 @@ class CreateClient(BaseCommand):
             db.session.rollback()
             raise e
         
-        return {"id": client_id, "email": self.email}
+        return {"id": self.id, "email": self.email}
 
 def salt_password(password):
     salt = uuid.uuid4().hex

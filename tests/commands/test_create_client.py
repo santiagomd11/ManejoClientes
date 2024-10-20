@@ -8,6 +8,7 @@ class TestCreateClient(unittest.TestCase):
 
     def setUp(self):
         self.valid_input = {
+            'id': 'ed140dbe-06d8-45dc-b5fc-4eb46606fc47',
             'name': 'John Doe',
             'email': 'john.doe@example.com',
             'idNumber': '123456789',
