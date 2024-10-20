@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "2ddcbf8f-705c-46b3-8ce5-62902f869900",
+		"name": "ManejoClientes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33340382"
+	},
+	"item": [
+		{
+			"name": "Clear Database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/clients/clear_database",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"clients",
+						"clear_database"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the response body to a JSON object\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Set the 'clientId' variable with the 'id' from the response\r",
+							"pm.collectionVariables.set(\"clientId\", jsonData.id);\r",
+							"\r",
+							"// Log the clientId to the console for verification (optional)\r",
+							"console.log(\"Client ID set: \" + jsonData.id);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"ed140dbe-06d8-45dc-b5fc-4eb46606fc47\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\"\n\n}"
+				},
+				"url": {
+					"raw": "{{host}}/clients/create_client",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"clients",
+						"create_client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/clients/get_client/{{clientId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"clients",
+						"get_client",
+						"{{clientId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client Plan",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"plan\": \"EMPRENDEDOR\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/clients/update_client_plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"clients",
+						"update_client_plan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/clients/ping",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"clients",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:5001"
+		},
+		{
+			"key": "clientId",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

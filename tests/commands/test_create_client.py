@@ -2,17 +2,20 @@ import unittest
 from unittest.mock import patch, MagicMock
 from src.commands.create_client import CreateClient
 from src.errors.errors import BadRequest
-from src.models.client import Client, db, Plan
+from src.models.client import Client, db, Plan, Rol
 
 class TestCreateClient(unittest.TestCase):
 
     def setUp(self):
         self.valid_input = {
+            'id': 'ed140dbe-06d8-45dc-b5fc-4eb46606fc47',
             'name': 'John Doe',
             'email': 'john.doe@example.com',
             'idNumber': '123456789',
             'phoneNumber': '1234567890',
-            'plan': Plan.EMPRESARIO
+            'plan': Plan.EMPRESARIO,
+            'rol': Rol.CLIENTE.name,
+            'company': 'Test Company'
         }
 
     @patch('src.commands.create_client.db.session.commit')
@@ -30,7 +33,7 @@ class TestCreateClient(unittest.TestCase):
         command = CreateClient(invalid_input)
         with self.assertRaises(BadRequest) as context:
             command.execute()
-        self.assertEqual(str(context.exception), 'Name, password, and email are required')
+        self.assertEqual(str(context.exception), 'Name and email are required')
 
     @patch('src.commands.create_client.validators.email', return_value=False)
     def test_create_client_invalid_email(self, mock_valid_email):
