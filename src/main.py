@@ -1,9 +1,15 @@
 import os
 import traceback
+import logging
+
 from flask import Flask, jsonify
 from flask_migrate import Migrate, init, upgrade, migrate, stamp
+
 from src.models.client import db
 from src.blueprints.services import services_bp
+
+logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
+logger = logging.getLogger(__name__)
 
 def create_app(config_name, local=False):
     app = Flask(__name__)
@@ -53,11 +59,8 @@ app = create_app('manejo-clientes')
 @app.errorhandler(Exception)
 def handle_exception(err):
     trace = traceback.format_exc()
-    response = {
-        "msg": getattr(err, 'description', str(err)),
-        "traceback": trace
-    }
-    return jsonify(response), getattr(err, 'code', 500)
+    logger.info("Log error: " + str(trace))
+    return jsonify({"message": err.description}), err.code
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
