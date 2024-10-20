@@ -29,11 +29,11 @@ jobs:
   
     - name: Build Docker image
       run: |
-        docker build -t my-microservice .
+        docker build -t clients-microservice .
 
     - name: Tag Docker image
       run: |
-        docker tag my-microservice:latest ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
+        docker tag clients-microservice:latest ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
 
     - name: Push Docker image to ECR
       run: |
