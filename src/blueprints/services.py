@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from commands.create_client import CreateClient
+from src.commands.create_client import CreateClient
 
 from src.commands.update_plan import UpdateClientPlan
 from src.commands.get_client import GetClient

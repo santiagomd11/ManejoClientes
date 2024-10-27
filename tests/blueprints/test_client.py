@@ -28,7 +28,8 @@ class TestClientEndpoints(unittest.TestCase):
             'phoneNumber': '1234567890',
             'plan': Plan.EMPRESARIO.name,
             'rol': Rol.CLIENTE.name,
-            'company': 'Test Company'
+            'company': 'Test Company',
+            'idType': 'CEDULA_CIUDADANIA'
         }
 
     def test_create_client_success(self):

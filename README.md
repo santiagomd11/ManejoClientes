@@ -77,7 +77,8 @@ Crea un cliente con los datos brindados, el nombre del cliente debe ser único, 
     "phoneNumber": "321567890",
     "plan": "EMPRENDEDOR_PLUS",
     "rol": "CLIENTE",
-    "company": "uniandes"
+    "company": "uniandes", 
+    "idType": "CEDULA_CIUDADANIA"
 
 }
 ```
@@ -90,14 +91,8 @@ Informacion del cliente
 
 ```json
 {
-    "company": "uniandes",
     "email": "john.doe@example.com",
-    "id": "ed140dbe-06d8-45dc-b5fc-4eb46606fc47",
-    "id_number": "123456789",
-    "name": "John Doe",
-    "phoneNumber": "321567890",
-    "plan": "EMPRENDEDOR_PLUS",
-    "rol": "client"
+    "id": "b030dabc-ff9e-4cbb-8d0b-974a68f297da"
 }
 ```
 </td>
@@ -137,8 +132,15 @@ N/A
 
 ```json
 {
+    "company": "uniandes",
     "email": "john.doe@example.com",
-    "id": "b030dabc-ff9e-4cbb-8d0b-974a68f297da"
+    "id": "ed140dbe-06d8-45dc-b5fc-4eb46606fc47",
+    "id_number": "123456789",
+    "name": "John Doe",
+    "phoneNumber": "321567890",
+    "plan": "EMPRENDEDOR_PLUS",
+    "rol": "client",
+    "idType": "CEDULA_CIUDADANIA"
 }
 ```
 </td>
@@ -257,7 +259,7 @@ Para correr las pruebas del proyecto ejecutar los siguientes comandos:
 pipenv shell
 ```
 ```bash
-pipenv run pytest --cov=src -v -s --cov-fail-under=70
+pipenv run pytest --cov=src -v -s --cov-fail-under=80
 ```
 
 ## Autor
