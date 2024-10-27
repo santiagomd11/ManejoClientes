@@ -1,18 +1,19 @@
 from src.commands.base_command import BaseCommand
 from src.errors.errors import BadRequest
-from src.models.client import Client, db, Plan
+from src.models.client import Client, db, Plan, Rol, IdType
 import validators
 import uuid
 
 class CreateClient(BaseCommand):
     def __init__(self, json):
         self.id = json.get('id', '')
+        self.id_type = json.get('idType', IdType.CEDULA_CIUDADANIA)
         self.name = json.get('name', '').strip()
         self.email = json.get('email', '').strip().lower()
         self.id_number = json.get('idNumber', '').strip()
         self.phone_number = json.get('phoneNumber', '').strip()
         self.plan = json.get('plan', Plan.EMPRESARIO)
-        self.rol = json.get('rol', 'client')
+        self.rol = json.get('rol', Rol.CLIENTE)
         self.company = json.get('company', '')
 
     def execute(self):
@@ -38,14 +39,19 @@ class CreateClient(BaseCommand):
 
             if not self.company:
                 raise BadRequest('Company is required')
-
+    
+            if not self.id_type:
+                raise BadRequest('Id type is required')
+            
             client = Client(
                 id=self.id,
                 name=self.name,
-                email=self.email,
+                id_type=self.id_type,
                 id_number=self.id_number,
+                email=self.email,
                 phoneNumber=self.phone_number,
                 plan=self.plan,
+                rol=self.rol,
                 company=self.company
             )
 

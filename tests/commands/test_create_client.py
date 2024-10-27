@@ -15,7 +15,8 @@ class TestCreateClient(unittest.TestCase):
             'phoneNumber': '1234567890',
             'plan': Plan.EMPRESARIO,
             'rol': Rol.CLIENTE.name,
-            'company': 'Test Company'
+            'company': 'Test Company',
+            'idType': 'CEDULA_CIUDADANIA'
         }
 
     @patch('src.commands.create_client.db.session.commit')

@@ -38,6 +38,8 @@ def create_app(config_name, local=False):
     app_context.push()
 
     db.init_app(app)
+    # time.sleep(5)
+    # db.drop_all()
     time.sleep(5)
     db.create_all()
     
