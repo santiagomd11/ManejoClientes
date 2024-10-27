@@ -7,6 +7,24 @@
 	},
 	"item": [
 		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{hostClients}}/clients/ping",
+					"host": [
+						"{{hostClients}}"
+					],
+					"path": [
+						"clients",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Clear Database",
 			"event": [
 				{
@@ -30,12 +48,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\"\n\n}"
 				},
 				"url": {
-					"raw": "{{host}}/clients/clear_database",
+					"raw": "{{hostClients}}/clients/clear_database",
 					"host": [
-						"{{host}}"
+						"{{hostClients}}"
 					],
 					"path": [
 						"clients",
@@ -76,12 +94,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"ed140dbe-06d8-45dc-b5fc-4eb46606fc47\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\"\n\n}"
+					"raw": "{\n    \"id\": \"ed140dbe-06d8-45dc-b5fc-4eb46606fc47\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\",\n    \"idType\": \"CEDULA_CIUDADANIA\"\n}"
 				},
 				"url": {
-					"raw": "{{host}}/clients/create_client",
+					"raw": "{{hostClients}}/clients/create_client",
 					"host": [
-						"{{host}}"
+						"{{hostClients}}"
 					],
 					"path": [
 						"clients",
@@ -97,9 +115,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/clients/get_client/{{clientId}}",
+					"raw": "{{hostClients}}/clients/get_client/{{clientId}}",
 					"host": [
-						"{{host}}"
+						"{{hostClients}}"
 					],
 					"path": [
 						"clients",
@@ -125,9 +143,9 @@
 					"raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"plan\": \"EMPRENDEDOR\"\n}"
 				},
 				"url": {
-					"raw": "{{host}}/clients/update_client_plan",
+					"raw": "{{hostClients}}/clients/update_client_plan",
 					"host": [
-						"{{host}}"
+						"{{hostClients}}"
 					],
 					"path": [
 						"clients",
@@ -138,18 +156,19 @@
 			"response": []
 		},
 		{
-			"name": "Ping",
+			"name": "Get client new plan",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/clients/ping",
+					"raw": "{{hostClients}}/clients/get_client/{{clientId}}",
 					"host": [
-						"{{host}}"
+						"{{hostClients}}"
 					],
 					"path": [
 						"clients",
-						"ping"
+						"get_client",
+						"{{clientId}}"
 					]
 				}
 			},
@@ -180,11 +199,16 @@
 	],
 	"variable": [
 		{
-			"key": "host",
-			"value": "http://localhost:5001"
+			"key": "clientId",
+			"value": "",
+			"type": "string"
 		},
 		{
-			"key": "clientId",
+			"key": "hostClients",
+			"value": "52.73.82.183:5001"
+		},
+		{
+			"key": "hostGateway",
 			"value": "",
 			"type": "string"
 		}
