@@ -31,7 +31,7 @@ class Client(db.Model):
     email = db.Column(db.String, default='')
     phoneNumber = db.Column(db.String, default='')
     plan = db.Column(db.Enum(Plan), default=Plan.EMPRESARIO)
-    rol = db.Column(db.String, default=Rol.CLIENTE)
+    rol = db.Column(db.Enum(Rol), default=Rol.CLIENTE)
     company = db.Column(db.String, default='')
 
 
