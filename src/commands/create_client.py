@@ -17,32 +17,32 @@ class CreateClient(BaseCommand):
         self.company = json.get('company', '')
 
     def execute(self):
+        if not self.id:
+            raise BadRequest('Id is required')
+        
+        if not (self.name and self.email):
+            raise BadRequest('Name and email are required')
+
+        valid_email = validators.email(self.email)
+        if not valid_email:
+            raise BadRequest('Invalid email format')
+
+        if not self.id_number:
+            raise BadRequest('Id is required')
+
+        if not self.phone_number:
+            raise BadRequest('Phone number is required')
+        
+        if not self.rol:
+            raise BadRequest('Rol is required')
+
+        if not self.company:
+            raise BadRequest('Company is required')
+
+        if not self.id_type:
+            raise BadRequest('Id type is required')
+
         try:
-            if not self.id:
-                raise BadRequest('Id is required')
-            
-            if not (self.name and self.email):
-                raise BadRequest('Name and email are required')
-
-            valid_email = validators.email(self.email)
-            if not valid_email:
-                raise BadRequest('Invalid email format')
-
-            if not self.id_number:
-                raise BadRequest('Id is required')
-
-            if not self.phone_number:
-                raise BadRequest('Phone number is required')
-            
-            if not self.rol:
-                raise BadRequest('Rol is required')
-
-            if not self.company:
-                raise BadRequest('Company is required')
-    
-            if not self.id_type:
-                raise BadRequest('Id type is required')
-            
             client = Client(
                 id=self.id,
                 name=self.name,
