@@ -1,5 +1,5 @@
 from src.commands.base_command import BaseCommand
-from src.errors.errors import BadRequest
+from src.errors.errors import BadRequest, PreconditionFailed
 from src.models.client import Client, db, Plan, Rol, IdType
 import validators
 import uuid
@@ -60,7 +60,7 @@ class CreateClient(BaseCommand):
 
         except Exception as e:
             db.session.rollback()
-            raise e
+            raise PreconditionFailed("Failed to create client verify the data or if the client already exists")
         
         return {"id": self.id, "email": self.email}
 

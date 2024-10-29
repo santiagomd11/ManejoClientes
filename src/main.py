@@ -50,8 +50,12 @@ app = create_app('manejo-clientes')
 @app.errorhandler(Exception)
 def handle_exception(err):
     trace = traceback.format_exc()
-    logger.info("Log error: " + str(trace))
-    return jsonify({"message": err.description}), err.code
+
+    response = {
+        "msg": err.description if err.description else "",
+                                                       "traceback": trace
+    }
+    return jsonify(response), err.code
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
