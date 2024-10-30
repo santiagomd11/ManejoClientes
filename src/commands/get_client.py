@@ -25,6 +25,9 @@ class GetClient(BaseCommand):
             }
 
             return client_info
+        
+        except NotFound as e:
+            raise e
 
         except Exception as e:
             db.session.rollback()
