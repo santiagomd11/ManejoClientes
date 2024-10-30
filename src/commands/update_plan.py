@@ -23,6 +23,9 @@ class UpdateClientPlan(BaseCommand):
             client.plan = self.new_plan
             db.session.commit()
 
+        except NotFound as e:
+            raise e
+        
         except Exception as e:
             db.session.rollback()
             raise e
