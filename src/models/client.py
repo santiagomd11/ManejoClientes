@@ -32,7 +32,7 @@ class Client(db.Model):
     phoneNumber = db.Column(db.String, default='')
     plan = db.Column(db.Enum(Plan), default=Plan.EMPRENDEDOR)
     rol = db.Column(db.Enum(Rol), default=Rol.CLIENTE)
-    company = db.Column(db.String, default='', unique=True)
+    company = db.Column(db.String, default='')
 
 
 class EnumToDictionary(fields.Field):
