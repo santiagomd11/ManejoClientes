@@ -10,9 +10,9 @@ db = SQLAlchemy()
 
 
 class Plan(enum.Enum):
-    EMPRESARIO = 1
-    EMPRENDEDOR = 2
-    EMPRENDEDOR_PLUS = 3
+    EMPRENDEDOR = 1
+    EMPRESARIO = 2
+    EMPRESARIO_PLUS = 3
     
 class Rol(enum.Enum):
     AGENTE = 1,
@@ -30,7 +30,7 @@ class Client(db.Model):
     id_number = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, default='')
     phoneNumber = db.Column(db.String, default='')
-    plan = db.Column(db.Enum(Plan), default=Plan.EMPRESARIO)
+    plan = db.Column(db.Enum(Plan), default=Plan.EMPRENDEDOR)
     rol = db.Column(db.Enum(Rol), default=Rol.CLIENTE)
     company = db.Column(db.String, default='')
 
