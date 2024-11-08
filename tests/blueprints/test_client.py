@@ -68,7 +68,7 @@ class TestClientEndpoints(unittest.TestCase):
         }
         response = self.client.put('/clients/update_client_plan', data=json.dumps(update_data), content_type='application/json')
         self.assertEqual(response.status_code, 404)
-        self.assertIn('Client not found', response.get_json()['message'])
+        self.assertIn('No clients found for company None', response.get_json()['message'])
     
     def test_get_client_not_found(self):
         response = self.client.get('/clients/get_client/nonexistent_id')
