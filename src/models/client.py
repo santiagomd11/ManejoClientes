@@ -25,14 +25,14 @@ class IdType(enum.Enum):
 class Client(db.Model):
     __tablename__ = 'client'
     id = db.Column(db.String, primary_key=True, unique=True, nullable=False)
-    name = db.Column(db.String, unique=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
     id_type = db.Column(db.Enum(IdType), default=IdType.CEDULA_CIUDADANIA)
     id_number = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String, default='')
+    email = db.Column(db.String, default='', unique=True)
     phoneNumber = db.Column(db.String, default='')
     plan = db.Column(db.Enum(Plan), default=Plan.EMPRENDEDOR)
     rol = db.Column(db.Enum(Rol), default=Rol.CLIENTE)
-    company = db.Column(db.String, default='')
+    company = db.Column(db.String, default='', unique=True)
 
 
 class EnumToDictionary(fields.Field):
