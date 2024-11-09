@@ -15,7 +15,8 @@ class TestCreateClient(unittest.TestCase):
             'phoneNumber': '1234567890',
             'plan': Plan.EMPRESARIO,
             'rol': Rol.CLIENTE.name,
-            'company': 'Test Company'
+            'company': 'Test Company',
+            'idType': 'CEDULA_CIUDADANIA'
         }
 
     @patch('src.commands.create_client.db.session.commit')
@@ -48,7 +49,7 @@ class TestCreateClient(unittest.TestCase):
         command = CreateClient(self.valid_input)
         with self.assertRaises(Exception) as context:
             command.execute()
-        self.assertEqual(str(context.exception), 'DB Error')
+        self.assertEqual(str(context.exception), 'Failed to create client verify the data or if the client already exists')
         mock_rollback.assert_called_once()
 
 if __name__ == '__main__':

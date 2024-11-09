@@ -15,15 +15,19 @@ class GetClient(BaseCommand):
             client_info = {
                 'id': client.id,
                 'name': client.name,
-                'email': client.email,
                 'id_number': client.id_number,
+                'idType': client.id_type.name,
+                'email': client.email,
                 'phoneNumber': client.phoneNumber,
                 'plan': client.plan.name,
-                'rol': client.rol,
+                'rol': client.rol.name,
                 'company': client.company
             }
 
             return client_info
+        
+        except NotFound as e:
+            raise e
 
         except Exception as e:
             db.session.rollback()

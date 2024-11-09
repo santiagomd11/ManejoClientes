@@ -28,7 +28,8 @@ class TestClientEndpoints(unittest.TestCase):
             'phoneNumber': '1234567890',
             'plan': Plan.EMPRESARIO.name,
             'rol': Rol.CLIENTE.name,
-            'company': 'Test Company'
+            'company': 'Test Company',
+            'idType': 'CEDULA_CIUDADANIA'
         }
 
     def test_create_client_success(self):
@@ -40,14 +41,14 @@ class TestClientEndpoints(unittest.TestCase):
         del incomplete_data['name']
         response = self.client.post('/clients/create_client', data=json.dumps(incomplete_data), content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Name and email are required', response.get_json()['error'])
+        self.assertIn('Name and email are required', response.get_json()['message'])
 
     def test_create_client_invalid_email(self):
         invalid_email_data = self.client_data.copy()
         invalid_email_data['email'] = 'invalid-email'
         response = self.client.post('/clients/create_client', data=json.dumps(invalid_email_data), content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertIn('Invalid email format', response.get_json()['error'])
+        self.assertIn('Invalid email format', response.get_json()['message'])
 
     # def test_update_client_plan_success(self):
     #     # First, create a client
@@ -67,12 +68,12 @@ class TestClientEndpoints(unittest.TestCase):
         }
         response = self.client.put('/clients/update_client_plan', data=json.dumps(update_data), content_type='application/json')
         self.assertEqual(response.status_code, 404)
-        self.assertIn('Client not found', response.get_json()['error'])
+        self.assertIn('No clients found for company None', response.get_json()['message'])
     
     def test_get_client_not_found(self):
         response = self.client.get('/clients/get_client/nonexistent_id')
         self.assertEqual(response.status_code, 404)
-        self.assertIn('Client with id nonexistent_id not found', response.get_json()['error'])
+        self.assertIn('Client with id nonexistent_id not found', response.get_json()['message'])
 
     def test_ping(self):
         response = self.client.get('/clients/ping')

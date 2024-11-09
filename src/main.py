@@ -7,6 +7,7 @@ from flask import Flask, jsonify
 
 from src.models.client import db
 from src.blueprints.services import services_bp
+from src.errors.errors import ApiError # fix was put the complte path previpous was errors.errors
 
 logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"))
 logger = logging.getLogger(__name__)
@@ -39,17 +40,19 @@ def create_app(config_name, local=False):
 
     db.init_app(app)
     time.sleep(5)
+    db.drop_all()
+    time.sleep(5)
     db.create_all()
+    
+    @app.errorhandler(ApiError)
+    def handle_exception(err):
+        trace = traceback.format_exc()
+        logger.info("Log error: " + str(trace))
+        return jsonify({"message": err.description}), err.code
     
     return app
 
 app = create_app('manejo-clientes')
-
-@app.errorhandler(Exception)
-def handle_exception(err):
-    trace = traceback.format_exc()
-    logger.info("Log error: " + str(trace))
-    return jsonify({"message": err.description}), err.code
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001)
