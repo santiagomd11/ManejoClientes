@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\"\n\n}"
+					"raw": ""
 				},
 				"url": {
 					"raw": "{{hostClients}}/clients/clear_database",
@@ -94,7 +94,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"ed140dbe-06d8-45dc-b5fc-4eb46606fc47\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR_PLUS\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\",\n    \"idType\": \"CEDULA_CIUDADANIA\"\n}"
+					"raw": "{\n    \"id\": \"ed140dbe-06d8-45dc-b5fc-4eb46606fc47\",\n    \"name\": \"John Doe\",\n    \"email\": \"john.doe@example.com\",\n    \"idNumber\": \"123456789\",\n    \"phoneNumber\": \"321567890\",\n    \"plan\": \"EMPRENDEDOR\",\n    \"rol\": \"CLIENTE\",\n    \"company\": \"uniandes\",\n    \"idType\": \"CEDULA_CIUDADANIA\"\n}"
 				},
 				"url": {
 					"raw": "{{hostClients}}/clients/create_client",
@@ -140,7 +140,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"plan\": \"EMPRENDEDOR\"\n}"
+					"raw": "{\n  \"company\": \"uniandes\",\n  \"plan\": \"EMPRESARIO_PLUS\"\n}"
 				},
 				"url": {
 					"raw": "{{hostClients}}/clients/update_client_plan",

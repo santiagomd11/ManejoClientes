@@ -40,8 +40,6 @@ def create_app(config_name, local=False):
 
     db.init_app(app)
     time.sleep(5)
-    db.drop_all()
-    time.sleep(5)
     db.create_all()
     
     @app.errorhandler(ApiError)
